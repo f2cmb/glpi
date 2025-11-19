@@ -1338,7 +1338,7 @@ TWIG, $twig_params);
      *
      * @return void
      **/
-    public static function showFormMassiveAction($ma)
+    public static function showFormMassiveAction(MassiveAction $ma): void
     {
         global $CFG_GLPI;
 
@@ -1629,14 +1629,14 @@ TWIG, $twig_params);
      * @return int
      */
     public static function dropdownAllDevices(
-        $myname,
-        $itemtype,
-        $items_id = 0,
-        $admin = 0,
-        $users_id = 0,
-        $entity_restrict = -1,
-        $options = []
-    ) {
+        string $myname,
+        string $itemtype,
+        int $items_id = 0,
+        int $admin = 0,
+        int $users_id = 0,
+        int $entity_restrict = -1,
+        array $options = []
+    ): int {
         global $CFG_GLPI;
 
         $params = [static::$items_id_1 => 0,
