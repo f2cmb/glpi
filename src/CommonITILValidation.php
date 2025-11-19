@@ -711,7 +711,7 @@ abstract class CommonITILValidation extends CommonDBChild
      *
      * @return string
      **/
-    public static function getStatus($value, bool $decorated = false)
+    public static function getStatus($value, bool $decorated = false): string
     {
         $statuses = self::getAllStatusArray(true, true);
 
@@ -745,7 +745,7 @@ abstract class CommonITILValidation extends CommonDBChild
      *
      * @return string
      **/
-    public static function getStatusColor($value)
+    public static function getStatusColor($value): string
     {
 
         switch ($value) {
@@ -774,7 +774,7 @@ abstract class CommonITILValidation extends CommonDBChild
      *
      * @return int
      **/
-    public static function getNumberToValidate($users_id)
+    public static function getNumberToValidate(int $users_id): int
     {
         global $DB;
 
@@ -900,7 +900,7 @@ abstract class CommonITILValidation extends CommonDBChild
      *
      * @return void
      **/
-    public static function showFormMassiveAction()
+    public static function showFormMassiveAction(): void
     {
 
         global $CFG_GLPI;
@@ -1970,7 +1970,7 @@ HTML;
      *
      * @return void
      */
-    public static function alertValidation(CommonITILObject $item, $type)
+    public static function alertValidation(CommonITILObject $item, string $type): void
     {
         // No alert for new item
         if ($item->isNewID($item->getID())) {
