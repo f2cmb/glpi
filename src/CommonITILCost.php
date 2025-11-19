@@ -366,7 +366,7 @@ abstract class CommonITILCost extends CommonDBChild
      *
      * @return int
      **/
-    public function getTotalActionTimeForItem($items_id)
+    public function getTotalActionTimeForItem($items_id): int|null
     {
         global $DB;
 
@@ -386,7 +386,7 @@ abstract class CommonITILCost extends CommonDBChild
      *
      * @return array
      **/
-    public function getLastCostForItem($items_id)
+    public function getLastCostForItem($items_id): array|false
     {
         global $DB;
 
