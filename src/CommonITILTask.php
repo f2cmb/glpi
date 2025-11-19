@@ -1696,7 +1696,7 @@ abstract class CommonITILTask extends CommonDBTM implements CalDAVCompatibleItem
      *
      * @return void
      */
-    public function showMassiveActionAddTaskForm()
+    public function showMassiveActionAddTaskForm(): void
     {
         $twig = TemplateRenderer::getInstance();
 
@@ -1729,7 +1729,7 @@ abstract class CommonITILTask extends CommonDBTM implements CalDAVCompatibleItem
      *
      * @return DBmysqlIterator
      */
-    public static function getTaskList($status, $showgrouptickets, $start = null, $limit = null)
+    public static function getTaskList(string $status, bool $showgrouptickets, ?int $start = null, ?int $limit = null): DBmysqlIterator
     {
         global $DB;
 
