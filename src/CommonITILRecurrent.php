@@ -66,21 +66,21 @@ abstract class CommonITILRecurrent extends CommonDropdown
      *
      * @return class-string<CommonDBTM>
      */
-    abstract public static function getConcreteClass();
+    abstract public static function getConcreteClass(): string;
 
     /**
      * Template class to use to create the concrete items
      *
      * @return class-string<CommonDBTM>
      */
-    abstract public static function getTemplateClass();
+    abstract public static function getTemplateClass(): string;
 
     /**
      * Predefined field class to use to set the concrete items's data
      *
      * @return class-string<CommonDBTM>
      */
-    abstract public static function getPredefinedFieldsClass();
+    abstract public static function getPredefinedFieldsClass(): string;
 
     public static function displayTabContentForItem(
         CommonGLPI $item,
@@ -575,7 +575,7 @@ abstract class CommonITILRecurrent extends CommonDropdown
      *
      * @return class-string<CommonDBTM>[]
      **/
-    public static function getAllTypesForHelpdesk()
+    public static function getAllTypesForHelpdesk(): array
     {
         return CommonITILObject::getAllTypesForHelpdesk();
     }
