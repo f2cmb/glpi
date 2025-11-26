@@ -2850,4 +2850,108 @@ HTML;
             $this->assertEquals($expected, $found_items);
         }
     }
+
+    public function testGetDropdownValueWithUsedAndConditionNot(): void
+    {
+        $this->login();
+
+        $finished_state = $this->createItem(\ProjectState::class, [
+            'name' => 'Finished State',
+            'is_finished' => 1,
+        ]);
+
+        $open_state = $this->createItem(\ProjectState::class, [
+            'name' => 'Open State',
+            'is_finished' => 0,
+        ]);
+
+        $project = $this->createItem(\Project::class, [
+            'name' => 'Test Project',
+            'entities_id' => 0,
+        ]);
+
+        $task_linked = $this->createItem(\ProjectTask::class, [
+            'name' => 'Task already linked',
+            'projects_id' => $project->getID(),
+            'projectstates_id' => $open_state->getID(),
+        ]);
+
+        $task_finished = $this->createItem(\ProjectTask::class, [
+            'name' => 'Task in finished state',
+            'projects_id' => $project->getID(),
+            'projectstates_id' => $finished_state->getID(),
+        ]);
+
+        $task_available = $this->createItem(\ProjectTask::class, [
+            'name' => 'Task available',
+            'projects_id' => $project->getID(),
+            'projectstates_id' => $open_state->getID(),
+        ]);
+
+        $ticket = $this->createItem(Ticket::class, [
+            'name' => 'Test Ticket',
+            'content' => 'Test content',
+            'entities_id' => 0,
+        ]);
+
+        $this->createItem(\ProjectTask_Ticket::class, [
+            'projecttasks_id' => $task_linked->getID(),
+            'tickets_id' => $ticket->getID(),
+        ]);
+
+        $used = [$task_linked->getID() => $task_linked->getID()];
+        $condition = [
+            'NOT' => [
+                'glpi_projecttasks.projectstates_id' => [$finished_state->getID()],
+            ],
+        ];
+
+        $params_without_used = [
+            'itemtype' => \ProjectTask::class,
+            'display_emptychoice' => false,
+            'entity_restrict' => 0,
+            'condition' => $condition,
+        ];
+        $params_without_used['_idor_token'] = Session::getNewIDORToken(\ProjectTask::class, $params_without_used);
+
+        $result_without_used = \Dropdown::getDropdownValue($params_without_used, false);
+        $ids_without_used = $this->extractResultIds($result_without_used);
+
+        $this->assertContains($task_linked->getID(), $ids_without_used);
+        $this->assertNotContains($task_finished->getID(), $ids_without_used);
+        $this->assertContains($task_available->getID(), $ids_without_used);
+
+        $params_with_used = [
+            'itemtype' => \ProjectTask::class,
+            'display_emptychoice' => false,
+            'entity_restrict' => 0,
+            'used' => $used,
+            'condition' => $condition,
+        ];
+        $params_with_used['_idor_token'] = Session::getNewIDORToken(\ProjectTask::class, $params_with_used);
+
+        $result_with_used = \Dropdown::getDropdownValue($params_with_used, false);
+        $ids_with_used = $this->extractResultIds($result_with_used);
+
+        $this->assertNotContains($task_linked->getID(), $ids_with_used);
+        $this->assertNotContains($task_finished->getID(), $ids_with_used);
+        $this->assertContains($task_available->getID(), $ids_with_used);
+    }
+
+    private function extractResultIds(array $result): array
+    {
+        $ids = [];
+        if (isset($result['results'])) {
+            foreach ($result['results'] as $group) {
+                if (isset($group['children'])) {
+                    foreach ($group['children'] as $item) {
+                        $ids[] = $item['id'];
+                    }
+                } elseif (isset($group['id'])) {
+                    $ids[] = $group['id'];
+                }
+            }
+        }
+        return $ids;
+    }
 }
