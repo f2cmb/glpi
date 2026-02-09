@@ -99,13 +99,11 @@ export class BubbleMenuHelper {
 
     async assertButtonVisible(command: BubbleMenuCommand): Promise<void> {
         const menu = await this.assertVisible();
-        // eslint-disable-next-line playwright/no-raw-locators
         await expect(menu.getByTitle(command, { exact: true })).toBeVisible();
     }
 
     async assertButtonHidden(command: BubbleMenuCommand): Promise<void> {
         const menu = await this.assertVisible();
-        // eslint-disable-next-line playwright/no-raw-locators
         await expect(menu.getByTitle(command, { exact: true })).toBeHidden();
     }
 
