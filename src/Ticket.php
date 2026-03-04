@@ -1063,6 +1063,7 @@ class Ticket extends CommonITILObject implements DefaultSearchRequestInterface
             if (isset($input['_filename']) || isset($input['_content'])) {
                 $input['_disablenotif'] = true;
             }
+            // une proposition de changemernt
         }
 
         $input = parent::prepareInputForUpdate($input);
