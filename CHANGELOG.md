@@ -41,6 +41,7 @@ The present file will list all changes made to the project; according to the
 - The `KnowbaseItemCategory` itemtype and the `knowbasecategory` right have been removed. Knowledge base categories are now regular articles; hierarchy is expressed by linking child articles to parent articles.
 - Generic tree-browse (`TreeBrowse`) support for the knowledge base. The KB aside provides browsing.
 - The `Search` and `Browse` tabs of the knowledge base article list. The list is now a plain search page.
+- The `templates/components/alerts_macros.html.twig` macros (`alert`, `alert_success`, `alert_info`, `alert_warning`, `alert_danger`), available since 11.0. Use the `<twig:Alert>` component instead: `<twig:Alert:Info :heading="…" :content="…" />`, or one of `<twig:Alert:Success>`, `<twig:Alert:Warning>`, `<twig:Alert:Danger>`. Note that the macros passed their first argument as the alert title, which maps to `:heading`, not `:content`.
 
 ### API changes
 - Type declarations for some `CronTask` methods have been added.
