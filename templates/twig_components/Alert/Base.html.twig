@@ -33,7 +33,7 @@
 {# @prop color 'primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark' Contextual color #}
 {# @prop dismissible boolean Display a dismiss button #}
 {# @prop heading string|null Optional alert title #}
-{# @prop content string Alert content, can be overriden with a block #}
+{# @prop content string Alert content, wrapped in .alert-description. Escaped: pass text, not markup #}
 {# @prop icon string CSS icon class. If empty resolves automatically from color #}
 {# @prop important boolean Renders the alert with a solid background #}
 {# @prop link_url string|null URL of an optional action link #}
@@ -45,6 +45,16 @@
 {# @block content Alert message #}
 {# @block action Trailing action link area #}
 {# @block close Dismiss section #}
+
+{# The default slot overrides the `content` block and therefore does NOT get the
+ # .alert-description wrapper. That is intentional: the slot exists for free content
+ # (lists, forms, buttons) where a secondary-grey wrapper is wrong. An author who
+ # wants the wrapper around slot content writes it explicitly.
+ #
+ # role="alert" is the default and is an assertive live region. It is correct for a
+ # message inserted or revealed dynamically. For a block present at page load, pass
+ # role="status" instead, or role="" when the block is decorative.
+ #}
 
 <div {{ attributes.defaults({class: this.classes, role: 'alert'}) }}>
     {%- block icon -%}

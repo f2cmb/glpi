@@ -183,4 +183,43 @@ class AlertRenderingTest extends GLPITestCase
         $html = $this->render('<twig:Alert content="My content" />');
         $this->assertStringContainsString('<div class="alert-description">My content</div>', $html);
     }
+
+    public function test_slot_content_is_not_wrapped_in_alert_description(): void
+    {
+        // Documented divergence: the prop wraps, the default slot does not.
+        // An author who wants the wrapper around slot content writes it.
+        $html = $this->render('<twig:Alert>My content</twig:Alert>');
+
+        $this->assertStringContainsString('My content', $html);
+        $this->assertStringNotContainsString('alert-description', $html);
+    }
+
+    public function test_role_alert_is_the_default(): void
+    {
+        $html = $this->render('<twig:Alert content="Something" />');
+
+        $this->assertStringContainsString('role="alert"', $html);
+    }
+
+    public function test_role_can_be_overridden_by_the_caller(): void
+    {
+        $html = $this->render('<twig:Alert role="status" content="Something" />');
+
+        $this->assertStringContainsString('role="status"', $html);
+        $this->assertStringNotContainsString('role="alert"', $html);
+    }
+
+    public function test_role_can_be_emptied_by_the_caller(): void
+    {
+        $html = $this->render('<twig:Alert role="" content="Something" />');
+
+        $this->assertStringNotContainsString('role="alert"', $html);
+    }
+
+    public function test_important_renders_the_solid_background_class(): void
+    {
+        $html = $this->render('<twig:Alert:Danger important content="Something" />');
+
+        $this->assertStringContainsString('alert-important', $html);
+    }
 }
