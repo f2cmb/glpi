@@ -207,10 +207,15 @@ class AlertConventionTest extends GLPITestCase
 
     /**
      * Counts class attributes carrying "alert" as a class token.
+     *
+     * The `s` modifier lets the attribute value span several lines, a style this
+     * codebase already uses (see templates/pages/admin/form/form_editor.html.twig).
+     * Without it a multi-line class attribute would be invisible here, and the CI
+     * would report green while the markup came back.
      */
     private function countInSource(string $source): int
     {
-        if (preg_match_all('/class\s*=\s*(["\'])(.*?)\1/', $source, $matches) === 0) {
+        if (preg_match_all('/class\s*=\s*(["\'])(.*?)\1/s', $source, $matches) === 0) {
             return 0;
         }
 
