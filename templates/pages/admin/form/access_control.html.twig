@@ -46,13 +46,11 @@
             {% if warnings|length > 0 %}
                 <div class="mb-5">
                     {% for warning in warnings %}
-                        <div
-                            class="alert alert-warning d-flex align-items-center"
+                        <twig:Alert:Warning
+                            class="d-flex align-items-center"
                             role="alert"
-                        >
-                            <i class="ti ti-alert-triangle me-2" aria-hidden="true"></i>
-                            {{ warning }}
-                        </div>
+                            :content="warning"
+                        />
                     {% endfor %}
                 </div>
             {% endif %}

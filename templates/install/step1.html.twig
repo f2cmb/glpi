@@ -32,21 +32,13 @@
 
 {% if config_write_denied %}
     <h3>{{ __("Checking write access to configuration files") }}</h3>
-    <div class="alert alert-danger" role="alert">
-        <div class="d-flex">
-            <div>
-                <i class="ti ti-alert-circle me-2" aria-hidden="true"></i>
-            </div>
-            <div>
-                <h4 class="alert-title">{{ __('Write access denied for configuration files') }}</h4>
-                <div class="text-secondary">
-                    {{ __('A temporary write access to the following files is required: %s.')|format('`' ~ config_files_to_update|join('`, `') ~ '`') }}
-                    <br />
-                    {{ __('Write access to these files can be removed once the operation is finished.') }}
-                </div>
-            </div>
+    <twig:Alert:Danger :heading="__('Write access denied for configuration files')" role="alert">
+        <div class="text-secondary">
+            {{ __('A temporary write access to the following files is required: %s.')|format('`' ~ config_files_to_update|join('`, `') ~ '`') }}
+            <br />
+            {{ __('Write access to these files can be removed once the operation is finished.') }}
         </div>
-    </div>
+    </twig:Alert:Danger>
 {% else %}
     <h3>{{ __("Checking of the compatibility of your environment with the execution of GLPI") }}</h3>
     {{ include('install/blocks/requirements_table.html.twig', {requirements: requirements}, with_context = false) }}

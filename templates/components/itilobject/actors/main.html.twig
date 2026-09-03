@@ -179,9 +179,8 @@
                <input class="form-check-input" type="checkbox" id="use_notification" name="_notifications_use_notification" />
                <label class="form-check-label" for="use_notification">{{ __('Email followup') }}</label>
             </div>
-            <div id="alert_notification_disable" class='alert alert-info d-flex align-items-center mb-4 d-none' role='alert'>
-               <i class='ti ti-info-circle fs-2x' aria-hidden='true'></i>
-               <span class='ms-2'>
+            <twig:Alert:Info id="alert_notification_disable" class="d-flex align-items-center mb-4 d-none" role="alert">
+               <span>
                   {{ __('Notifications are disabled because:') }}
                   <ul>
                      <li>{{ __('User does not have an email address.') }}</li>
@@ -190,7 +189,7 @@
                   </ul>
                   {{ __('However, you can reactivate the notifications for this ticket.') }}
                </span>
-            </div>
+            </twig:Alert:Info>
             <input type="email" class="form-control" id="alternative_email" name="_notifications_alternative_email" />
          </div>
       </div>

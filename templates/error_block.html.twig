@@ -32,20 +32,13 @@
 
 <div class="card">
     <div class="card-body">
-        <div role="alert" class="alert alert-danger alert-important">
-            <div class="d-flex">
-                <div class="me-2">
-                    <i class="ti ti-alert-triangle fs-2x" aria-hidden="true"></i>
-                </div>
-                <div>
-                    {{ message }}
-                    {% if link_url is not empty %}
-                        <br>
-                        <a href="{{ link_url }}">{{ link_text }}</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+        <twig:Alert:Danger important role="alert">
+            {{ message }}
+            {% if link_url is not empty %}
+                <br>
+                <a href="{{ link_url }}">{{ link_text }}</a>
+            {% endif %}
+        </twig:Alert:Danger>
 
         {% if trace is not empty %}
             <pre data-testid="stack-trace">{{ trace }}</pre>

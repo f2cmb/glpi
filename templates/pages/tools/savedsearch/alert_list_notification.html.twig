@@ -43,7 +43,7 @@
             {{ notifications|map(n => n['name'])|join(', ') }}
          {% endif %}
       {% else %}
-         <div class="alert alert-warning">
+         <twig:Alert:Warning role="status">
             {{ __('Notification does not exist') }}
             {% if params.canedit %}
                <br>
@@ -52,7 +52,7 @@
                   'canedit': false
                }) %}
             {% endif %}
-         </div>
+         </twig:Alert:Warning>
       {% endif %}
    </div>
    <div class="my-2">

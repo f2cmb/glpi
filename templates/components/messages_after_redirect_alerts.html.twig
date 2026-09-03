@@ -35,24 +35,23 @@
 
    {% for type, message in messages %}
       {% set message = message|join('<br />') %}
-      {% set class = '' %}
+      {% set color = '' %}
       {% set title = '' %}
       {% if type == constant('ERROR') %}
-         {% set class = 'alert-danger' %}
+         {% set color = 'danger' %}
          {% set title = _n('Error', 'Errors', 1) %}
       {% elseif type == constant('WARNING') %}
-         {% set class = 'alert-warning' %}
+         {% set color = 'warning' %}
          {% set title = __('Warning') %}
       {% else %}
-         {% set class = 'alert-info' %}
+         {% set color = 'info' %}
          {% set title = _n('Information', 'Information', 1) %}
       {% endif %}
 
-      <div class="alert alert-important {{ class }}" role="alert">
-         <h3>{{ title }}</h3>
+      <twig:Alert :color="color" important :heading="title" role="alert">
          <p>
             {{ message|raw }}
          </p>
-      </div>
+      </twig:Alert>
    {% endfor %}
 {% endif %}

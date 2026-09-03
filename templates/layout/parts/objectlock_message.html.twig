@@ -44,7 +44,7 @@
 {% endmacro %}
 
 {% if autolock_readmode %}
-    <div id="message_after_lock" class="d-inline-block w-100 alert alert-warning">
+    <twig:Alert:Warning id="message_after_lock" class="d-inline-block w-100" role="status">
         <span class="me-3">
             <i class="ti ti-eye" aria-hidden="true"></i>
             {{ __('Read-only mode') }}
@@ -55,10 +55,10 @@
                 icon: 'ti ti-pencil',
             }) }}
         </form>
-    </div>
+    </twig:Alert:Warning>
 {% else %}
     {% if not new_lock %}
-        <div id="message_after_lock" class="d-inline-block w-100 alert alert-warning">
+        <twig:Alert:Warning id="message_after_lock" class="d-inline-block w-100" role="status">
             {% if item.fields['users_id'] != session('glpiID') %}
                 <strong class="nowrap">
                     {% set locked_by_msg %}
@@ -95,7 +95,7 @@
                     {{ _self.forceUnlockButton(item, false) }}
                 </strong>
             {% endif %}
-        </div>
+        </twig:Alert:Warning>
     {% endif %}
 {% endif %}
 

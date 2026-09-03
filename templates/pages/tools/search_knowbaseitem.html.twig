@@ -75,9 +75,7 @@
                     no_limit_display: true,
                 }) }}
             {% else %}
-                <div class="alert alert-info">
-                    {{ __('No results found') }}
-                </div>
+                <twig:Alert:Info :content="__('No results found')" role="status" />
             {% endif %}
 
         </div>

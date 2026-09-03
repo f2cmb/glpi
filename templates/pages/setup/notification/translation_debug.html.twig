@@ -57,10 +57,9 @@
             }) }}
         </div>
     {% else %}
-        <div class="alert alert-info d-flex align-items-center m-0" role="alert">
-            <i class="ti ti-info-circle me-1" aria-hidden="true"></i>
-            {{ __('The preview is not available for the notifications related to %s.')|format(template.fields['itemtype']|itemtype_name(get_plural_number())) }}
-        </div>
+        <twig:Alert:Info class="d-flex align-items-center m-0" role="alert"
+            :content="__('The preview is not available for the notifications related to %s.')|format(template.fields['itemtype']|itemtype_name(get_plural_number()))"
+        />
     {% endif %}
 
     {% if data is not null %}

@@ -202,10 +202,11 @@
                 <span>{{ 'AuthMail'|itemtype_name }}</span>
             </div>
 
-            <div id="oauth_redirect_alert_{{ rand }}" class="d-flex alert alert-info mx-2">
-                <i class="ti ti-info-circle fs-2x alert-icon" aria-hidden="true"></i>
-                {{ __('Once the form has been validated, you will be redirected to your supplierʼs authentication page if necessary.') }}
-            </div>
+            <twig:Alert:Info
+                id="oauth_redirect_alert_{{ rand }}"
+                class="d-flex mx-2"
+                :content="__('Once the form has been validated, you will be redirected to your supplierʼs authentication page if necessary.')"
+            />
 
             {{ fields.dropdownArrayField(
                 'smtp_oauth_provider',
@@ -411,11 +412,10 @@
 {% else %}
     <div class="row">
         <div class="col">
-            <div class="alert alert-info">
-                <i class="ti ti-info-circle fs-2x alert-icon" aria-hidden="true"></i>
+            <twig:Alert:Info role="status">
                 {{ __('Notifications are disabled.') }}
                 <a href="{{ config('root_doc') }}/front/setup.notification.php">{{ __('See configuration') }}</a>
-            </div>
+            </twig:Alert:Info>
         </div>
     </div>
 {% endif %}

@@ -101,13 +101,12 @@ if ($success) {
     // language=Twig
     echo TemplateRenderer::getInstance()->renderFromStringTemplate(<<<TWIG
         <div class="d-flex justify-content-center">
-            <div class="alert alert-success">
-                <div class="alert-title">{{ title }}</div>
+            <twig:Alert:Success role="status" :heading="title">
                 <div>{{ message }}</div>
                 <div class="d-flex flex-row-reverse mt-3">
                     <a href="{{ path('front/logout.php') }}?noAUTO=1" role="button" class="btn btn-primary">{{ btn_label }}</a>
                 </div>
-            </div>
+            </twig:Alert:Success>
         </div>
 TWIG, $twig_params);
 } else {

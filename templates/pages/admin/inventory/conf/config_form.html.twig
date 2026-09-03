@@ -85,7 +85,7 @@
                 </div>
                 <div id="oauth_client_hint" class="row" style="display: none;">
                     <div class="col-11 mx-auto mb-3">
-                        <div class="alert alert-info d-block" role="note">
+                        <twig:Alert:Info role="note">
                             <div class="d-block">
                                 {{ __('Using OAuth Client Credentials requires a registered OAuth client with the %1$s scope.')|e|format('<code>inventory</code>')|raw }}
                             </div>
@@ -100,15 +100,15 @@
                                     {{ __('Add an OAuth client') }}
                                 </a>
                             </div>
-                        </div>
+                        </twig:Alert:Info>
                     </div>
                 </div>
                 <div id="no_auth_warning" class="row" style="display: none;">
                     <div class="col-11 mx-auto mb-3">
-                        <div class="alert alert-danger" role="alert">
-                            <i class="ti ti-alert-triangle" aria-hidden="true"></i>
-                            {{ __('Not using any authentication on inventory is not recommended and poses a security risk. Any agent will be able to send inventory data without verification.') }}
-                        </div>
+                        <twig:Alert:Danger
+                            role="alert"
+                            :content="__('Not using any authentication on inventory is not recommended and poses a security risk. Any agent will be able to send inventory data without verification.')"
+                        />
                     </div>
                 </div>
                 <div id="basic_auth_fields" class="row" style="display: none;">

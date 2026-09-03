@@ -102,18 +102,18 @@
                 </span>
             {% endset %}
 
-            <div class="alert d-flex align-items-center justify-content-start flex-wrap">
+            <twig:Alert class="d-flex align-items-center justify-content-start flex-wrap" role="status">
                 {{ __('This ticket is for %1$s and %2$s to be notified of future events of this ticket.')|format(
                     '<span class="mx-2">' ~ user_dropdown_html|raw ~ '</span>',
                     '<span class="mx-2">' ~ notification_part_html|raw ~ '</span>'
                 )|raw }}
-            </div>
+            </twig:Alert>
         {% else %}
-            <div class="alert d-flex align-items-center justify-content-start flex-wrap">
+            <twig:Alert class="d-flex align-items-center justify-content-start flex-wrap" role="status">
                 {{ __('This ticket is for %1$s')|format(
                     '<span class="mx-2">' ~ user_dropdown_html|raw ~ '</span>'
                 )|raw }}
-            </div>
+            </twig:Alert>
         {% endif %}
     {% endif %}
 {% endif %}

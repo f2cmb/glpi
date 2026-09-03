@@ -160,9 +160,7 @@
                                         {{ item_meta.next_run_display }}
                                     {% endif %}
                                     {% if config('maintenance_mode') %}
-                                        <div class="alert alert-warning">
-                                            {{ __('Maintenance mode enabled, running tasks is disabled') }}
-                                        </div>
+                                        <twig:Alert:Warning :content="__('Maintenance mode enabled, running tasks is disabled')" role="status" />
                                     {% elseif can_execute and launch %}
                                         {# ID is defined in components/form/buttons.html.twig #}
                                         <button class="btn btn-primary" type="submit" name="execute" value="{{ item.fields['name'] }}">

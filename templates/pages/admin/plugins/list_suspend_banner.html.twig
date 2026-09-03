@@ -31,7 +31,7 @@
  #}
 
 {% if execution_suspended %}
-    <div class="alert alert-warning" role="alert">
+    <twig:Alert:Warning role="alert">
         {{ __('The execution of the plugins is suspended.') }}
         <form class="d-inline" action="{{ 'Plugin'|itemtype_form_path }}" method="POST">
             <button type="submit" name="action" value="resume_all_execution" class="btn btn-sm btn-primary me-1">
@@ -39,7 +39,7 @@
                 <span>{{ __('Resume execution of all active plugins') }}</span>
             </button>
         </form>
-    </div>
+    </twig:Alert:Warning>
 {% else %}
     <div class="text-end mb-3">
         <form class="d-inline" action="{{ 'Plugin'|itemtype_form_path }}" method="POST">

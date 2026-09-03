@@ -506,15 +506,12 @@ class AuthLDAP extends CommonDBTM
             ];
             // language=Twig
             echo TemplateRenderer::getInstance()->renderFromStringTemplate(<<<TWIG
-                <div class="text-center alert alert-danger">
-                    <i class="ti ti-alert-triangle alert-icon" aria-hidden="true"></i>
-                    <div class="alert-text">
-                        {{ missing_ext }}
-                        <br>
-                        {{ impossible_to_use_ldap }}
-                    </div>
+                <twig:Alert:Danger class="text-center" role="status">
+                    {{ missing_ext }}
+                    <br>
+                    {{ impossible_to_use_ldap }}
                     <span class="text-secondary fw-bold">{{ support_promote_message }}</span>
-                </div>
+                </twig:Alert:Danger>
 TWIG, $twig_params);
         }
         return true;
@@ -1593,10 +1590,11 @@ TWIG, ['authldaps_id' => $ID]);
             // language=Twig
             echo TemplateRenderer::getInstance()->renderFromStringTemplate(<<<TWIG
                 <div class="mb-3">
-                    <div class="alert alert-warning" role="alert">
-                        <i class="alert-icon ti ti-alert-triangle" aria-hidden="true"></i>
-                        <div class="alert-title">{{ warning }}</div>
-                        <span class="text-secondary">{{ warning_long }}</span>
+                    <twig:Alert:Warning
+                        role="alert"
+                        :heading="warning"
+                        :content="warning_long"
+                    />
                 </div>
 TWIG, $twig_params);
         }

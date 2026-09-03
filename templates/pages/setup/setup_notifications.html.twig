@@ -41,10 +41,9 @@
                </div>
 
                {% if use_notifications and not has_active_mode %}
-                  <div class="alert alert-important alert-warning m-3">
-                     <i class="ti ti-alert-triangle me-2" aria-hidden="true"></i>
-                     {{ __('You must enable at least one notification mode.') }}
-                  </div>
+                  <twig:Alert:Warning important class="m-3" role="status"
+                     :content="__('You must enable at least one notification mode.')"
+                  />
                {% endif %}
 
                <ul class="list-group list-group-flush">
@@ -108,10 +107,9 @@
                   </a>
                {% else %}
                   <div class="list-group-item">
-                     <div class="alert alert-important alert-warning m-3">
-                        <i class="ti ti-alert-triangle me-2" aria-hidden="true"></i>
-                        {{ __('Unable to configure notifications: please configure at least one notification type using the above configuration.') }}
-                     </div>
+                     <twig:Alert:Warning important class="m-3" role="status"
+                        :content="__('Unable to configure notifications: please configure at least one notification type using the above configuration.')"
+                     />
                   </div>
                {% endif %}
 

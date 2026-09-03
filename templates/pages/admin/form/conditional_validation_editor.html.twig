@@ -32,9 +32,11 @@
 
 {% set value_operators = manager.getValueOperatorForValidationDropdownValues(question_uuid) %}
 {% if value_operators is empty %}
-    <div class="alert alert-info mt-3">
-        {{ __('Conditional validation is not available for this question type.') }}
-    </div>
+    <twig:Alert:Info
+        class="mt-3"
+        :content="__('Conditional validation is not available for this question type.')"
+        role="status"
+    />
 {% else %}
     {% for condition in defined_conditions %}
         <div

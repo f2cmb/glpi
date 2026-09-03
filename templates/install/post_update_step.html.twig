@@ -31,11 +31,10 @@
  #}
 
 {% if not is_db_consistent %}
-    <div class="alert alert-important alert-danger my-2 mx-4" role="alert">
-        <i class="fas fa-2x fa-exclamation-triangle align-middle" aria-hidden="true"></i>
+    <twig:Alert:Danger important class="my-2 mx-4" role="alert">
         {{ __('The database schema is not consistent with the current GLPI version.') }}<br />
         {{ __('It is recommended to run the "%s" command to see the differences.')|format('php bin/console database:check_schema_integrity') }}
-    </div>
+    </twig:Alert:Danger>
 {% endif %}
 
 <h2>{{ __("One last thing before starting") }}</h2>

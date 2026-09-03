@@ -256,7 +256,9 @@ abstract class ITILTemplateField extends CommonDBChild
                 {% import 'components/form/basic_inputs_macros.html.twig' as inputs %}
                 <div>
                     {% if task_order_label is not null %}
-                        <div class="alert alert-info">{{ task_order_label }}</div>
+                        <twig:Alert:Info role="status">
+                            {{ task_order_label }}
+                        </twig:Alert:Info>
                     {% endif %}
                     <form name="itiltemplatehidden_form{{ rand }}" method="post" action="{{ form_url }}" data-submit-once>
                         {{ inputs.hidden(items_id_field, id) }}

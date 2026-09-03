@@ -67,6 +67,27 @@ class AlertRenderingTest extends GLPITestCase
         $this->assertStringNotContainsString('ti-info-circle', $html);
     }
 
+    public static function provideAlertColorResolvedIcon(): \Generator
+    {
+        yield 'success' => ['success', 'ti ti-check'];
+        yield 'warning' => ['warning', 'ti ti-alert-triangle'];
+        yield 'danger'  => ['danger',  'ti ti-exclamation-circle'];
+        yield 'info'    => ['info',    'ti ti-info-circle'];
+    }
+
+    /**
+     * Pins the color-to-icon map in AbstractAlert::getResolvedIcon(). Icons were
+     * removed from ~60 hand-built alert blocks on the premise that the component
+     * resolves the same glyph automatically; this is the test that keeps that
+     * premise true.
+     */
+    #[DataProvider('provideAlertColorResolvedIcon')]
+    public function test_renders_documented_icon_for_color(string $color, string $expected_icon_class): void
+    {
+        $html = $this->render("{{ component('Alert', {color: '$color'}) }}");
+        $this->assertStringContainsString($expected_icon_class, $html);
+    }
+
     // -------------------------------------------------------------------------
     // Variant components (Alert:Info, Alert:Warning, ...)
     // -------------------------------------------------------------------------
@@ -214,6 +235,7 @@ class AlertRenderingTest extends GLPITestCase
         $html = $this->render('<twig:Alert role="" content="Something" />');
 
         $this->assertStringNotContainsString('role="alert"', $html);
+        $this->assertStringContainsString('role=""', $html);
     }
 
     public function test_important_renders_the_solid_background_class(): void

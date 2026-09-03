@@ -61,9 +61,10 @@
 
     {% if config('use_notifications') == '0' %}
         {% set activation_msg %}
-            <span class="alert alert-warning">
-                {{ __('Notifications must be enabled to activate mentions.') }}
-            </span>
+            <twig:Alert:Warning
+                :content="__('Notifications must be enabled to activate mentions.')"
+                role="status"
+            />
         {% endset %}
         {{ fields.htmlField('use_mentions', activation_msg, __('Mentions configuration'), {full_width: true}) }}
     {% else %}

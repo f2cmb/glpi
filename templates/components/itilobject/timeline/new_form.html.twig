@@ -47,7 +47,7 @@
             <span class="mt-2 timeline-content left card">
                <div class="card-body">
                   {% if item.isNewItem() %}
-                     <div class="alert alert-info" role="alert">
+                     <twig:Alert:Info role="alert">
                         {% set entitybadge %}
                            <span class="ms-1">
                               {{ call('Entity::badgeCompletenameById', [item.fields['entities_id']])|raw }}
@@ -58,7 +58,7 @@
                            item.getTypeName(1),
                            entitybadge
                         )|raw }}
-                     </div>
+                     </twig:Alert:Info>
                   {% endif %}
 
                   {{ include('components/itilobject/timeline/simple_form.html.twig', {

@@ -430,29 +430,23 @@ HTML;
                     </span>
                 </div>
                 <div class='placeholder_info {{ is_placeholder ? "" : "d-none" }}' style="background-color: transparent; color: var(--tblr-body-color); font-size: var(--tblr-body-font-size)">
-                    <div class="alert alert-info">
-                        <div class="d-flex">
-                            <i class="ti ti-info-circle fs-2x me-3" aria-hidden="true"></i>
-                            <div>
-                                <h4 class="alert-title">{{ messages['placeholder_main'] }}</h4>
-                                <div class="mt-2">
-                                    <button class="btn btn-info btn-sm disable-dashboard-demo me-2 {{ can_disable_demo ? '' : 'd-none' }}" type="button">
-                                        <i class="ti ti-presentation-off" aria-hidden="true"></i>
-                                        <span>{{ messages['disable_demo_msg'] }}</span>
-                                    </button>
-                                    <script>
-                                        $('button.disable-dashboard-demo').on('click', function() {
-                                            $.post(CFG_GLPI.root_doc + '/ajax/dashboard.php', {
-                                                action: 'disable_placeholders'
-                                            }).then(() => {
-                                                window.location.reload();
-                                            });
-                                        });
-                                    </script>
-                                </div>
-                            </div>
+                    <twig:Alert:Info role="status" :heading="messages['placeholder_main']">
+                        <div class="mt-2">
+                            <button class="btn btn-info btn-sm disable-dashboard-demo me-2 {{ can_disable_demo ? '' : 'd-none' }}" type="button">
+                                <i class="ti ti-presentation-off" aria-hidden="true"></i>
+                                <span>{{ messages['disable_demo_msg'] }}</span>
+                            </button>
+                            <script>
+                                $('button.disable-dashboard-demo').on('click', function() {
+                                    $.post(CFG_GLPI.root_doc + '/ajax/dashboard.php', {
+                                        action: 'disable_placeholders'
+                                    }).then(() => {
+                                        window.location.reload();
+                                    });
+                                });
+                            </script>
                         </div>
-                    </div>
+                    </twig:Alert:Info>
                 </div>
 TWIG, $params);
         }

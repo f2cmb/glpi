@@ -32,7 +32,7 @@
 
 {% import 'components/form/fields_macros.html.twig' as fields %}
 
-<div class="alert alert-warning">
+<twig:Alert:Warning role="status">
    <strong>
       {% if is_dev %}
          {{ __('You are using a development version, be careful!') }}
@@ -45,7 +45,7 @@
       required: true,
       id: 'agree_unstable'
    }) }}
-</div>
+</twig:Alert:Warning>
 <script>
    $(function() {
        $('[name="continue"]').on('click', function(event){

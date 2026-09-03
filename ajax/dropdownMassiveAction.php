@@ -47,11 +47,11 @@ try {
     ];
     // language=Twig
     echo TemplateRenderer::getInstance()->renderFromStringTemplate(<<<TWIG
-        <div class="alert alert-warning">
-            <i class="alert-icon ti ti-alert-triangle" aria-hidden="true"></i>
-            <div class="alert-title">{{ title }}</div>
-            <div class="text-secondary">{{ text }}</div>
-        </div>
+        <twig:Alert:Warning
+            role="status"
+            :heading="title"
+            :content="text"
+        />
 TWIG, $twig_params);
     return;
 }

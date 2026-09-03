@@ -50,17 +50,23 @@
                             {% if not is_stable_release %}
                                 {% include 'install/agree_unstable.html.twig' with {'is_dev': is_dev_version} only %}
                             {% endif %}
-                            <p class="my-2 alert alert-important alert-warning">
-                                {{ __('The GLPI codebase has been updated. The update of the GLPI database is necessary.') }}
-                            </p>
+                            <twig:Alert:Warning
+                                :content="__('The GLPI codebase has been updated. The update of the GLPI database is necessary.')"
+                                important
+                                class="my-2"
+                                role="status"
+                            />
                             <button type="submit" name="continue" value="1" class="btn btn-primary">
                                 <i class="ti ti-check" aria-hidden="true"></i>{{ _x('button', 'Upgrade') }}
                             </button>
                         </form>
                     {% else %}
-                        <p class="mt-2 mb-n2 alert alert-important alert-warning">
-                            {{ __('You are trying to use GLPI with outdated files compared to the version of the database. Please install the correct GLPI files corresponding to the version of your database.') }}
-                        </p>
+                        <twig:Alert:Warning
+                            :content="__('You are trying to use GLPI with outdated files compared to the version of the database. Please install the correct GLPI files corresponding to the version of your database.')"
+                            important
+                            class="mt-2 mb-n2"
+                            role="status"
+                        />
                     {% endif %}
                 {% endif %}
             </div>

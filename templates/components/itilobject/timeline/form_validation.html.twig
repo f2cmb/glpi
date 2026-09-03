@@ -43,30 +43,24 @@
          {{ entry_i['content']|raw }}
 
          {% if (entry_i['comment_submission'] ?? '')|length %}
-            <div class='alert alert-info mt-2'>
-                <div class='d-flex'>
-                    <div><i class='ti ti-quote me-2' aria-hidden='true'></i></div>
-                    <div class="rich_text_container">
-                        {{ entry_i['comment_submission']|enhanced_html({
-                            'user_mentions': true,
-                            'images_gallery': true
-                        }) }}
-                    </div>
+            <twig:Alert:Info class="mt-2" role="status" icon="ti ti-quote">
+                <div class="rich_text_container">
+                    {{ entry_i['comment_submission']|enhanced_html({
+                        'user_mentions': true,
+                        'images_gallery': true
+                    }) }}
                 </div>
-            </div>
+            </twig:Alert:Info>
          {% endif %}
          {% if entry_i['comment_validation'] is defined and entry_i['comment_validation']|length %}
-            <div class='alert alert-info mt-2'>
-                <div class='d-flex'>
-                    <div><i class='ti ti-quote me-2' aria-hidden='true'></i></div>
-                    <div class="rich_text_container">
-                        {{ entry_i['comment_validation']|enhanced_html({
-                            'user_mentions': true,
-                            'images_gallery': true
-                        }) }}
-                    </div>
+            <twig:Alert:Info class="mt-2" role="status" icon="ti ti-quote">
+                <div class="rich_text_container">
+                    {{ entry_i['comment_validation']|enhanced_html({
+                        'user_mentions': true,
+                        'images_gallery': true
+                    }) }}
                 </div>
-            </div>
+            </twig:Alert:Info>
          {% endif %}
 
          {% if entry_i['can_answer'] ?? false %}

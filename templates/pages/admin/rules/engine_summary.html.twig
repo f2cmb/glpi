@@ -30,7 +30,7 @@
  # ---------------------------------------------------------------------
  #}
 
-<div class="alert alert-info">
+<twig:Alert:Info role="status">
    {% if collection.stop_on_first_match %}
       <span>{{ __('The engine will stop after the first matched rule.') }}</span>
    {% else %}
@@ -44,4 +44,4 @@
    {% if collection.isRuleUseConditions %}
       <span>{{ __('The rules are conditional based on a type of action.') }}</span>
    {% endif %}
-</div>
+</twig:Alert:Info>

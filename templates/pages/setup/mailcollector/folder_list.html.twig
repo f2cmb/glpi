@@ -53,5 +53,5 @@
       {% endif %}
    </ul>
 {% else %}
-   <div class="alert alert-danger">{{ __('An error occurred trying to connect to collector.') }}</div>
+   <twig:Alert:Danger :content="__('An error occurred trying to connect to collector.')" />
 {% endif %}

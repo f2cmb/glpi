@@ -48,9 +48,7 @@
 
          {% set maintenance_text = config('maintenance_text') %}
          {% if maintenance_text|length %}
-            <div class="alert alert-warning mt-4">
-               {{ maintenance_text }}
-            </div>
+            <twig:Alert:Warning class="mt-4" :content="maintenance_text" role="status" />
          {% endif %}
          <div class="empty-action">
             <a href="{{ index_path() }}" class="btn btn-primary">

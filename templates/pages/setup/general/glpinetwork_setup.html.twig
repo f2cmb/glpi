@@ -33,14 +33,16 @@
 {% import 'components/form/fields_macros.html.twig' as fields %}
 
 {% if not services_available %}
-    <div class="alert alert-warning">
-        <div class="alert-title">{{ __('%1$s services website seems to be unavailable from your network or offline!')|format(__('GLPI Network')) }}</div>
+    <twig:Alert:Warning
+        :heading="__('%1$s services website seems to be unavailable from your network or offline!')|format(__('GLPI Network'))"
+        role="status"
+    >
         <span class="text-secondary">
             {% if curl_error is not null %}
                 {{ __('Error was: %s')|format(curl_error) }}
             {% endif %}
         </span>
-    </div>
+    </twig:Alert:Warning>
 {% endif %}
 
 {% set form_path = form_path|default('Config'|itemtype_form_path) %}
@@ -54,21 +56,20 @@
     {% if registration_key is empty %}
 
         {% set registration_alert %}
-            <div class="alert alert-info mb-0 d-inline-flex mt-3">
-                <div class="alert-icon">
-                    <i class="ti ti-shield-check" aria-hidden="true"></i>
+            <twig:Alert:Info
+                class="mb-0 d-inline-flex mt-3"
+                icon="ti ti-shield-check"
+                :heading="__('A registration key is needed to use some advanced features (like the plugin marketplace) in GLPI')"
+                role="status"
+            >
+                <div class="alert-description">
+                    <a href="{{ constant('GLPI_NETWORK_SERVICES') }}" class="btn btn-sm btn-outline-secondary me-1" target="_blank" rel="noopener noreferrer">
+                        <i class="ti ti-external-link" aria-hidden="true"></i>
+                        <span>{{ __('Register on %1$s!')|format(__('GLPI Network')) }}</span>
+                    </a>
+                    {{ __("And retrieve your key to paste it below") }}
                 </div>
-                <div>
-                    <h4 class="alert-heading">{{ __('A registration key is needed to use some advanced features (like the plugin marketplace) in GLPI') }}</h4>
-                    <div class="alert-description">
-                        <a href="{{ constant('GLPI_NETWORK_SERVICES') }}" class="btn btn-sm btn-outline-secondary me-1" target="_blank" rel="noopener noreferrer">
-                            <i class="ti ti-external-link" aria-hidden="true"></i>
-                            <span>{{ __('Register on %1$s!')|format(__('GLPI Network')) }}</span>
-                        </a>
-                        {{ __("And retrieve your key to paste it below") }}
-                    </div>
-                </div>
-            </div>
+            </twig:Alert:Info>
         {% endset %}
 
         {{ fields.htmlField('', registration_alert, null, {

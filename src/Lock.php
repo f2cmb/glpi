@@ -94,14 +94,12 @@ class Lock extends CommonGLPI
 
         // language=Twig
         $list_info_alert_template = <<<TWIG
-            <div class="alert alert-info d-flex align-items-center" role="alert">
-                <i class="ti ti-info-circle fs-1" aria-hidden="true"></i>
-                <span class="ms-2">
-                    <span class="alert-title">{{ alert_title }}</span>
-                    <br>
-                    {{ alert_content }}
-                </span>
-            </div>
+            <twig:Alert:Info
+                class="align-items-center"
+                role="status"
+                :heading="alert_title"
+                :content="alert_content"
+            />
 TWIG;
 
         echo TemplateRenderer::getInstance()->renderFromStringTemplate($list_info_alert_template, [

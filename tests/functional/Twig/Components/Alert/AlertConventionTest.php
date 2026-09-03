@@ -62,110 +62,57 @@ class AlertConventionTest extends GLPITestCase
     private const SKIPPED_PATH = 'templates/twig_components/Alert/';
 
     /**
-     * Hand-built alert blocks left to convert, as path => number of blocks.
+     * Alert markup that is deliberately not converted, as path => number of blocks.
+     *
+     * Every entry needs a reason. Adding one means writing duplicated markup on
+     * purpose, and has to be justified in review. This list only ever shrinks.
      *
      * @var array<string, int>
      */
-    private const ALLOWLIST = [
-        'ajax/dropdownMassiveAction.php'                                                                         => 1,
-        'front/updatepassword.php'                                                                               => 1,
-        'src/AuthLDAP.php'                                                                                       => 2,
-        'src/CommonITILValidation.php'                                                                           => 1,
+    private const PERMITTED_HAND_ROLLED_ALERTS = [
+        // This one sits in a <<<HTML heredoc that is echoed straight to the browser,
+        // not a <<<TWIG heredoc rendered through TemplateRenderer::renderFromStringTemplate().
+        // A component tag here would never be processed by Twig; converting it means
+        // routing the heredoc through Twig first. It was converted once during the
+        // campaign and then reverted, when the result reached the browser as literal
+        // markup instead of rendered HTML.
+        'src/CommonITILValidation.php'                                                                            => 1,
+
+        // The alert is nested inside a larger echoed block in each of these; extracting
+        // it means rewriting the surrounding PHP rendering code.
         'src/DisplayPreference.php'                                                                              => 1,
         'src/Dropdown.php'                                                                                       => 1,
-        'src/Glpi/Dashboard/Grid.php'                                                                            => 1,
         'src/Glpi/Error/ErrorDisplayHandler/HtmlErrorDisplayHandler.php'                                         => 1,
         'src/Glpi/Marketplace/View.php'                                                                          => 2,
         'src/Group_User.php'                                                                                     => 1,
-        'src/ITILTemplateField.php'                                                                              => 1,
-        'src/Lock.php'                                                                                           => 1,
-        'src/NetworkName.php'                                                                                    => 1,
-        'src/NetworkPortInstantiation.php'                                                                       => 3,
-        'src/NotificationAjaxSetting.php'                                                                        => 1,
+        'src/NetworkPortInstantiation.php'                                                                       => 1,
         'src/ProjectCost.php'                                                                                    => 1,
-        'src/RSSFeed.php'                                                                                        => 1,
         'src/Reservation.php'                                                                                    => 1,
         'src/Rule.php'                                                                                           => 1,
-        'src/RuleCommonITILObject.php'                                                                           => 3,
         'src/Stat.php'                                                                                           => 1,
-        'templates/central/messages.html.twig'                                                                   => 3,
-        'templates/components/datatable.html.twig'                                                               => 1,
-        'templates/components/helpdesk_forms/delegation_alert.html.twig'                                         => 2,
-        'templates/components/itilobject/actors/main.html.twig'                                                  => 1,
-        'templates/components/itilobject/fields_panel.html.twig'                                                 => 1,
-        'templates/components/itilobject/timeline/form_solution.html.twig'                                       => 1,
-        'templates/components/itilobject/timeline/form_validation.html.twig'                                     => 2,
-        'templates/components/itilobject/timeline/new_form.html.twig'                                            => 1,
-        'templates/components/logs.html.twig'                                                                    => 1,
-        'templates/components/messages_after_redirect_alerts.html.twig'                                          => 1,
-        'templates/components/search/criteria_filter.html.twig'                                                  => 1,
-        'templates/components/search/displaypreference_config.html.twig'                                         => 3,
-        'templates/components/search/displaypreference_list.html.twig'                                          => 1,
-        'templates/components/search/status_area.html.twig'                                                     => 1,
-        'templates/error_block.html.twig'                                                                        => 1,
-        'templates/install/agree_unstable.html.twig'                                                             => 1,
-        'templates/install/install.install_required.html.twig'                                                  => 1,
-        'templates/install/post_update_step.html.twig'                                                          => 1,
-        'templates/install/step1.html.twig'                                                                     => 1,
-        'templates/install/update.invalid_database.html.twig'                                                   => 1,
-        'templates/install/update.need_update.html.twig'                                                        => 2,
-        'templates/layout/parts/objectlock_message.html.twig'                                                   => 2,
-        'templates/layout/parts/saved_searches_list.html.twig'                                                  => 1,
-        'templates/layout/parts/user_header.html.twig'                                                          => 1,
-        'templates/maintenance.html.twig'                                                                       => 1,
-        'templates/pages/2fa/2fa_config.html.twig'                                                              => 1,
+
+        // The alert classes are carried by an <h3>, and the component always renders
+        // a <div>, so converting would remove a heading from the document outline.
+        // Arbitrated with the heading-levels work (2026-08-25-a11y-heading-levels-406-*).
         'templates/pages/2fa/macros.html.twig'                                                                  => 1,
-        'templates/pages/admin/assetdefinition/capacity/is_inventoriable_capacity_configuration_form.html.twig' => 1,
-        'templates/pages/admin/entity/assistance.html.twig'                                                     => 1,
-        'templates/pages/admin/entity/custom_ui.html.twig'                                                      => 1,
-        'templates/pages/admin/form/access_control.html.twig'                                                   => 1,
-        'templates/pages/admin/form/conditional_validation_editor.html.twig'                                    => 1,
-        'templates/pages/admin/form/form_destination.html.twig'                                                 => 1,
-        'templates/pages/admin/form/form_destination_form.html.twig'                                            => 1,
-        'templates/pages/admin/form/form_editor.html.twig'                                                      => 1,
-        'templates/pages/admin/helpdesk_home_config.html.twig'                                                  => 1,
-        'templates/pages/admin/inventory/conf/config_form.html.twig'                                            => 2,
-        'templates/pages/admin/inventory/upload_form.html.twig'                                                 => 1,
-        'templates/pages/admin/plugins/list_suspend_banner.html.twig'                                           => 1,
-        'templates/pages/admin/plugins/updatable_alert.html.twig'                                               => 1,
-        'templates/pages/admin/profile/assistance.html.twig'                                                    => 1,
-        'templates/pages/admin/profile/assistance_simple.html.twig'                                             => 1,
-        'templates/pages/admin/rules/engine_preview_criteria.html.twig'                                         => 1,
-        'templates/pages/admin/rules/engine_summary.html.twig'                                                  => 1,
-        'templates/pages/admin/transfer_list.html.twig'                                                         => 2,
-        'templates/pages/admin/user.substitute.html.twig'                                                       => 2,
-        'templates/pages/assets/template_list.html.twig'                                                        => 1,
-        'templates/pages/helpdesk/index.html.twig'                                                              => 1,
-        'templates/pages/login_error.html.twig'                                                                 => 1,
-        'templates/pages/setup/authentication.html.twig'                                                        => 1,
-        'templates/pages/setup/authentication/other_ext_setup.html.twig'                                        => 3,
-        'templates/pages/setup/crontask/crontask.html.twig'                                                     => 1,
-        'templates/pages/setup/general/dbreplica_setup.html.twig'                                               => 3,
-        'templates/pages/setup/general/glpinetwork_setup.html.twig'                                             => 2,
-        'templates/pages/setup/general/management_setup.html.twig'                                              => 1,
-        'templates/pages/setup/general/systeminfo_table.html.twig'                                              => 1,
-        'templates/pages/setup/mailcollector/folder_list.html.twig'                                             => 1,
-        'templates/pages/setup/mailcollector/setup_form.html.twig'                                              => 2,
-        'templates/pages/setup/notification/mailing_setting.html.twig'                                          => 2,
-        'templates/pages/setup/notification/translation_debug.html.twig'                                        => 1,
-        'templates/pages/setup/setup_notifications.html.twig'                                                   => 2,
-        'templates/pages/tools/kb/article.html.twig'                                                            => 1,
-        'templates/pages/tools/savedsearch/alert_list_notification.html.twig'                                   => 1,
-        'templates/pages/tools/search_knowbaseitem.html.twig'                                                   => 1,
-        'templates/password_form.html.twig'                                                                     => 3,
     ];
 
     public function testNoHandRolledAlertMarkupOutsideTheAllowlist(): void
     {
         $found = $this->countHandRolledAlerts();
 
+        $permitted = self::PERMITTED_HAND_ROLLED_ALERTS;
+        ksort($permitted);
+
         $this->assertSame(
-            self::ALLOWLIST,
+            $permitted,
             $found,
             "Hand-built alert markup does not match the allowlist.\n"
             . "Use <twig:Alert>, <twig:Alert:Info>, <twig:Alert:Warning>, <twig:Alert:Danger>\n"
             . "or <twig:Alert:Success> instead of writing class=\"alert ...\" by hand.\n"
-            . "If you converted blocks, lower or remove their entry in self::ALLOWLIST."
+            . "If a block is deliberately not converted, add it to "
+            . "self::PERMITTED_HAND_ROLLED_ALERTS with a reason.\n"
+            . "This comparison is order-independent: both sides are sorted by path."
         );
     }
 

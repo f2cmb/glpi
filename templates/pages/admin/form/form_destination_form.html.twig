@@ -49,9 +49,12 @@
                 destination.getConfig()
             )|raw }}
         {% else %}
-            <div class="mt-2 alert alert-danger" role="alert">
-                {{ __('This destination is not available, the plugin "%1$s" is deactivated or removed.')|format(_source) }}
-            </div>
+            {% set destination_unavailable_message = __('This destination is not available, the plugin "%1$s" is deactivated or removed.')|format(_source) %}
+            <twig:Alert:Danger
+                class="mt-2"
+                role="alert"
+                :content="destination_unavailable_message"
+            />
         {% endif %}
         {% if (concrete_destination ? concrete_destination.useDefaultConfigLayout() : true) and can_update %}
             <div class="mt-3 mb-3">

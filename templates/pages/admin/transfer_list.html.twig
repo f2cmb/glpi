@@ -37,11 +37,11 @@
 
 <div class="asset">
    {% if transfer_list|length > 0 %}
-      <div class="alert alert-info">
+      <twig:Alert:Info role="status">
          {{ __('You can continue to add elements to be transferred or execute the transfer now.') }}
          <br>
          {{ __('Think of making a backup before transfering items.') }}
-      </div>
+      </twig:Alert:Info>
       {{ fields.dropdownField('Transfer', 'id', 0, __('Transfer mode'), {
          rand: rand,
          comments: false,
@@ -90,8 +90,6 @@
          }
       ]) %}
    {% else %}
-      <div class="alert alert-danger">
-         {{ __('No selected element or badly defined operation') }}
-      </div>
+      <twig:Alert:Danger :content="__('No selected element or badly defined operation')" role="status" />
    {% endif %}
 </div>

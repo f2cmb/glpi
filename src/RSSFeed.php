@@ -560,10 +560,11 @@ class RSSFeed extends CommonDBVisible implements ExtraVisibilityCriteria
         // Test _rss cache directory. If permission trouble : unable to edit
         if (Toolbox::testWriteAccessToDirectory(GLPI_RSS_DIR) > 0) {
             echo TemplateRenderer::getInstance()->renderFromStringTemplate(<<<TWIG
-                <div class="alert alert-danger">
-                    <i class="alert-icon ti ti-alert-triangle" aria-hidden="true"></i>
-                    <div class="alert-title">{{ msg }}</div>
-                </div>
+                <twig:Alert:Danger
+                    role="status"
+                    icon="ti ti-alert-triangle"
+                    :heading="msg"
+                />
 TWIG, ['msg' => __('Check permissions to the directory: %s', GLPI_RSS_DIR)]);
             return false;
         }

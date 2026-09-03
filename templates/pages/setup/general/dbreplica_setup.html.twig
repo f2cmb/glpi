@@ -94,10 +94,10 @@
                 <div id="collapse-source" class="accordion-collapse collapse" aria-labelledby="heading-source" data-bs-parent="#accordion-source">
                     <div class="accordion-body">
                     {% if source_unknown %}
-                        <div class="alert alert-danger" role="alert">
+                        <twig:Alert:Danger role="alert">
                             <span class="text-secondary">{{ __('MySQL server returned an error:') }}</span>
                             <p class="mt-2">{{ replication_status['source']['error'] }}</p>
-                        </div>
+                        </twig:Alert:Danger>
                     {% else %}
                         <ul class="p-0 list-unstyled space-y-3">
                             <li>
@@ -160,10 +160,10 @@
                 <div id="collapse-replica{{ replica_num }}" class="accordion-collapse collapse" aria-labelledby="heading-replica{{ replica_num }}" data-bs-parent="#accordion-replica{{ replica_num }}">
                     <div class="accordion-body">
                     {% if replica_unkown %}
-                        <div class="alert alert-danger" role="alert">
+                        <twig:Alert:Danger role="alert">
                             <span class="text-secondary">{{ __('MySQL server returned an error:') }}</span>
                             <p class="mt-2">{{ replica_data['error'] }}</p>
-                        </div>
+                        </twig:Alert:Danger>
                     {% else %}
                         <ul class="p-0 list-unstyled space-y-3">
                             <li>
@@ -224,7 +224,7 @@
                         {# Display errors if io_running or sql_running are not running #}
                         {% set display_alert = (replica_data['io_running'] != 'Yes' or replica_data['sql_running'] != 'Yes') and (replica_data['last_io_error']|length or replica_data['last_sql_error']|length) %}
                         {% if display_alert %}
-                            <div class="alert alert-danger" role="alert">
+                            <twig:Alert:Danger role="alert">
                                 <span class="text-secondary">{{ __('MySQL server returned an error:') }}</span>
                                 <p class="mt-2">
                                     {% if replica_data['last_io_error'] is defined and replica_data['last_io_error'] is not empty %}
@@ -234,7 +234,7 @@
                                         <strong>{{ __('SQL Error:') }}</strong> {{ replica_data['last_sql_error'] }}
                                     {% endif %}
                                 </p>
-                            </div>
+                            </twig:Alert:Danger>
                         {% endif %}
                     {% endif %}
                     </div>

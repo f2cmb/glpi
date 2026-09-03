@@ -128,9 +128,7 @@ abstract class RuleCommonITILObject extends Rule
         if ($has_impact_urgency && !$has_priority_recompute) {
             // language=Twig
             echo TemplateRenderer::getInstance()->renderFromStringTemplate(<<<TWIG
-                <div class="alert alert-warning">
-                    {{ message }}
-                </div>
+                <twig:Alert:Warning :content="message" role="status" />
 TWIG, ['message' => __('Urgency or impact used in actions, think to add Priority: recompute action if needed.')]);
         }
 
@@ -157,9 +155,7 @@ TWIG, ['message' => __('Urgency or impact used in actions, think to add Priority
         ) {
             // language=Twig
             echo TemplateRenderer::getInstance()->renderFromStringTemplate(<<<TWIG
-                <div class="alert alert-warning">
-                    {{ message }}
-                </div>
+                <twig:Alert:Warning :content="message" role="status" />
 TWIG, ['message' => __('An action defines the approval step, but there is no action related to this approval step. Did you forgot to add an action?')]);
         } elseif (
             count(array_intersect($action_keys, $fields_trigerring_validation)) > 0
@@ -167,9 +163,7 @@ TWIG, ['message' => __('An action defines the approval step, but there is no act
         ) {
             // language=Twig
             echo TemplateRenderer::getInstance()->renderFromStringTemplate(<<<TWIG
-                <div class="alert alert-warning">
-                    {{ message }}
-                </div>
+                <twig:Alert:Warning :content="message" role="status" />
 TWIG, ['message' => __('An action related to an approval exists, but there is no action assigning the approval validation step. Therefore, the default one will be used.')]);
         }
 

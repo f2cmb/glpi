@@ -30,7 +30,9 @@
  # ---------------------------------------------------------------------
  #}
 
-<div class="alert alert-warning"><strong>{{ message }}</strong></div>
+<twig:Alert:Warning role="status">
+    <strong>{{ message }}</strong>
+</twig:Alert:Warning>
 
 <form action="install.php" method="post" class="d-inline" data-submit-once>
     <button type="submit" name="submit" class="btn btn-warning">

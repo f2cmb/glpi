@@ -32,33 +32,30 @@
 
 <div class="message-area">
    {% if messages.errors is defined and messages.errors|length > 0 %}
-      <div class="alert alert-important alert-danger d-flex" role="alert">
-         <i class="ti ti-alert-triangle fs-3x" aria-hidden="true"></i>
+      <twig:Alert:Danger important class="d-flex" role="alert">
          <ul>
             {% for error in messages.errors %}
                <li>{{ error|raw }}</li>
             {% endfor %}
          </ul>
-      </div>
+      </twig:Alert:Danger>
    {% endif %}
    {% if messages.warnings is defined and messages.warnings|length > 0 %}
-      <div class="alert alert-important alert-warning d-flex" role="alert">
-         <i class="ti ti-alert-triangle fs-3x" aria-hidden="true"></i>
+      <twig:Alert:Warning important class="d-flex" role="alert">
          <ul>
             {% for warning in messages.warnings %}
                <li>{{ warning|raw }}</li>
             {% endfor %}
          </ul>
-      </div>
+      </twig:Alert:Warning>
    {% endif %}
    {% if messages.infos is defined and messages.infos|length > 0 %}
-      <div class="alert alert-important alert-info d-flex" role="alert">
-         <i class="ti ti-info-circle fs-3x" aria-hidden="true"></i>
+      <twig:Alert:Info important class="d-flex" role="alert">
          <ul>
             {% for info in messages.infos %}
                <li>{{ info|raw }}</li>
             {% endfor %}
          </ul>
-      </div>
+      </twig:Alert:Info>
    {% endif %}
 </div>

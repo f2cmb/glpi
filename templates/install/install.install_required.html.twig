@@ -48,9 +48,11 @@
             <a href="{{ path('/install/install.php') }}" class="btn btn-primary">{{ __('Go to install page') }}</a>
         </div>
 
-        <div class="alert alert-warning mt-4">
-            {{ __('If you see this page when the installation has already been done, it means that the GLPI database configuration file has been removed or corrupted.') }}
-        </div>
+        <twig:Alert:Warning
+            :content="__('If you see this page when the installation has already been done, it means that the GLPI database configuration file has been removed or corrupted.')"
+            class="mt-4"
+            role="status"
+        />
     </div>
 </div>
 {% endblock %}

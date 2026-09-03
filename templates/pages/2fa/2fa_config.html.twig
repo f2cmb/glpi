@@ -46,9 +46,7 @@
             </tr>
             <tr class="tab_bg_1">
                 <td colspan="2">
-                    <div class="alert alert-info">
-                        {{ __('If 2FA is enforced, users with access to this %s will be required to use 2FA at login even if this is not their default')|format(item.getTypeName(1)) }}
-                    </div>
+                    <twig:Alert:Info :content="__('If 2FA is enforced, users with access to this %s will be required to use 2FA at login even if this is not their default')|format(item.getTypeName(1))" role="status" />
                 </td>
             </tr>
             <tr class="tab_bg_1">

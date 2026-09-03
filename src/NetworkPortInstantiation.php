@@ -349,7 +349,7 @@ class NetworkPortInstantiation extends CommonDBChild
             {% import 'components/form/fields_macros.html.twig' as fields %}
             {% if alert is not empty %}
                 {% set alert_field %}
-                    <div class="alert alert-info mb-0">{{ alert }}</div>
+                    <twig:Alert:Info :content="alert" role="status" class="mb-0" />
                 {% endset %}
                 {{ fields.htmlField('', alert_field, 'DeviceNetworkCard'|itemtype_name) }}
             {% else %}
@@ -428,7 +428,7 @@ TWIG, ['label' => __('MAC'), 'mac' => $netport->fields['mac']]);
             {% if recursive_items|length > 0 %}
                 {{ fields.dropdownField('Glpi\\\\Socket', 'sockets_id', socket_id, label) }}
             {% else %}
-                <div class="alert alert-info">{{ no_link_label }}</div>
+                <twig:Alert:Info :content="no_link_label" role="status" />
             {% endif %}
 TWIG, $twig_params);
     }

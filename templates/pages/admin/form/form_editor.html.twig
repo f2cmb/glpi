@@ -87,21 +87,15 @@
                                 aria-label="{{ __("Form details") }}"
                             >
                                 {% if invalid_questions|length %}
-                                    <div class="alert alert-danger" role="alert">
-                                        <div class="alert-icon">
-                                            <i class="ti ti-exclamation-circle" aria-hidden="true"></i>
+                                    <twig:Alert:Danger role="alert" :heading="__('These questions have an unknown type and will be deleted the next time this form is saved:')">
+                                        <div class="alert-description">
+                                            <ul class="alert-list">
+                                                {% for invalid_question in invalid_questions %}
+                                                    <li>{{ invalid_question.fields['name'] }}</li>
+                                                {% endfor %}
+                                            </ul>
                                         </div>
-                                        <div>
-                                            <h4 class="alert-heading">{{ __("These questions have an unknown type and will be deleted the next time this form is saved:") }}</h4>
-                                            <div class="alert-description">
-                                                <ul class="alert-list">
-                                                    {% for invalid_question in invalid_questions %}
-                                                        <li>{{ invalid_question.fields['name'] }}</li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </twig:Alert:Danger>
                                 {% endif %}
 
                                 {# Card containing the main form data: title, header and status #}

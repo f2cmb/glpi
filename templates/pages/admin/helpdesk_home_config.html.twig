@@ -40,13 +40,11 @@
             aria-labelledby="{{ header_id }}"
         >
             {% if info_text is not null %}
-                <div
-                    class="alert alert-info d-flex align-items-center mb-3"
+                <twig:Alert:Info
+                    class="d-flex align-items-center mb-3"
                     role="alert"
-                >
-                    <i class="ti ti-info-circle me-2" aria-hidden="true"></i>
-                    {{ info_text }}
-                </div>
+                    :content="info_text"
+                />
             {% endif %}
 
             <h1 id="{{ header_id }}" class="fs-2 mb-2">

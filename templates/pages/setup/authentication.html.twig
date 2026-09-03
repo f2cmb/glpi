@@ -51,10 +51,9 @@
                      <span>{{ 'AuthLDAP'|itemtype_name }}</span>
                   </a>
                {% else %}
-                  <div class="alert alert-important alert-warning m-3">
-                    <i class="ti ti-alert-triangle me-2" aria-hidden="true"></i>
-                    {{ __('The LDAP extension of your PHP parser isn’t installed') }}
-                  </div>
+                  <twig:Alert:Warning important class="m-3" role="status"
+                     :content="__('The LDAP extension of your PHP parser isn’t installed')"
+                  />
                {% endif %}
 
                <a class="list-group-item list-group-item-action" href="{{ path('front/authmail.php') }}">

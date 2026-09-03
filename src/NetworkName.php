@@ -395,7 +395,7 @@ class NetworkName extends FQDNLabel
                 echo TemplateRenderer::getInstance()->renderFromStringTemplate(<<<TWIG
                     {% import 'components/form/fields_macros.html.twig' as fields %}
                     {% set alert %}
-                        <div class="alert alert-warning">{{ alert }}</div>
+                        <twig:Alert:Warning :content="alert" role="status" />
                     {% endset %}
                     {{ field.htmlField('', alert, 'NetworkName'|itemtype_name) }}
 TWIG, ['alert' => __("Several network names available! Go to the tab 'Network Name' to manage them.")]);

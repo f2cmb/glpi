@@ -84,14 +84,9 @@
             <div class="container-xl">
                 {# Display password alerts #}
                 {% if password_alert|length %}
-                    <div class="alert alert-warning alert-dismissible bg-white" role="alert">
-                        <div class="d-flex mb-2">
-                            <div>
-                                <i class="ti ti-alert-triangle me-1" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                {{ password_alert }}
-                            </div>
+                    <twig:Alert:Warning class="bg-white" role="alert">
+                        <div class="mb-2">
+                            {{ password_alert }}
                         </div>
 
                         <div class="btn-list">
@@ -99,7 +94,7 @@
                                 {{ __('Update my password') }}
                             </a>
                         </div>
-                    </div>
+                    </twig:Alert:Warning>
                 {% endif %}
 
                 {# TODO: deprecate this hook and make a new one that doesn't expect a table as a container #}

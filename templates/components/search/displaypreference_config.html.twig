@@ -38,26 +38,23 @@
     <input type="hidden" name="itemtype" value="{{ itemtype }}">
     <input type="hidden" name="users_id" value="{{ users_id }}">
     {% if not available_itemtype %}
-        <div class="alert alert-danger">
-            {{ __('These preferences cannot be edited at this time. The item type no longer exists or is provided by a plugin that is not enabled.') }}
-        </div>
+        <twig:Alert:Danger :content="__('These preferences cannot be edited at this time. The item type no longer exists or is provided by a plugin that is not enabled.')" role="status" />
     {% else %}
         {% if is_global %}
             <div class="my-1 me-1">
-                <div class="alert alert-secondary">
-                    <i class="ti ti-info-circle" aria-hidden="true"></i>
+                <twig:Alert color="secondary" role="status">
                     <i>{{ __('These preferences are used by everyone that does not have a personal view configured.') }}</i>
-                </div>
+                </twig:Alert>
             </div>
         {% endif %}
         {% if not is_global and not has_personal %}
-            <div class="alert alert-warning mt-3">
+            <twig:Alert:Warning class="mt-3" role="status">
                 {{ __('No personal criteria. Create personal parameters?') }}
                 <button type="button" class="btn btn-primary ms-3" name="activate" value="1">
                     <i class="ti ti-plus" aria-hidden="true"></i>
                     <span>{{ __('Create') }}</span>
                 </button>
-            </div>
+            </twig:Alert:Warning>
         {% else %}
             <div class="pt-3">
                 {% if available_to_add|length > 0 %}
